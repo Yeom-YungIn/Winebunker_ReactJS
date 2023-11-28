@@ -1,44 +1,31 @@
 import { SearchOutlined } from '@ant-design/icons';
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table } from 'antd';
 import '../../../styles/main.css';
+import {useDispatch} from "react-redux";
+import {loadList} from "../../../_actions/list_action";
 
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        price: 32,
-        store: 'New York No. 1 Lake Park',
-        purchaseDate: '2023-11-27',
-    },
-    {
-        key: '2',
-        name: 'Joe Black',
-        price: 42,
-        store: 'London No. 1 Lake Park',
-        purchaseDate: '2023-11-27',
-    },
-    {
-        key: '3',
-        name: 'Jim Green',
-        price: 32,
-        store:'Sydney No. 1 Lake Park',
-        purchaseDate: '2023-11-27',
-    },
-    {
-        key: '4',
-        name: 'Jim Red',
-        price: 32,
-        store: 'London No. 2 Lake Park',
-        purchaseDate: '2023-11-26',
-    },
-];
-
-export function SearchList(props) {
+export function SearchList() {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
+    const [data, setData] = useState(null);
     const searchInput = useRef(null);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await dispatch(loadList());
+                setData(response.payload)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, [dispatch]);
+
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
@@ -145,10 +132,11 @@ export function SearchList(props) {
     const columns = [
         {
             title: '와인명',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'vinName',
+            key: 'vinName',
             width: '30%',
-            ...getColumnSearchProps('name'),
+            ...getColumnSearchProps('vinName'),
+            render: (text, record) => record.vin.vinName,
         },
         {
             title: '가격',
@@ -175,7 +163,7 @@ export function SearchList(props) {
     ];
     return (
         <div className="centered-table">
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={data} rowKey={(render)=> render.id} />
         </div>
     );
 }
