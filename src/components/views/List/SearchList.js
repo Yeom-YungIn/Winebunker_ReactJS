@@ -45,7 +45,7 @@ export function SearchList() {
             >
                 <Input
                     ref={searchInput}
-                    placeholder={`Search ${dataIndex}`}
+                    placeholder={`Search`}
                     value={selectedKeys[0]}
                     onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -79,19 +79,6 @@ export function SearchList() {
                         type="link"
                         size="small"
                         onClick={() => {
-                            confirm({
-                                closeDropdown: false,
-                            });
-                            setSearchText(selectedKeys[0]);
-                            setSearchedColumn(dataIndex);
-                        }}
-                    >
-                        Filter
-                    </Button>
-                    <Button
-                        type="link"
-                        size="small"
-                        onClick={() => {
                             close();
                         }}
                     >
@@ -107,8 +94,10 @@ export function SearchList() {
                 }}
             />
         ),
-        onFilter: (value, record) =>
-            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilter: (value, record) => {
+            console.log(record[`${dataIndex}`])
+            record[`${dataIndex}`].toString().includes(value)
+        },
         onFilterDropdownOpenChange: (visible) => {
             if (visible) {
                 setTimeout(() => searchInput.current?.select(), 100);
@@ -135,15 +124,14 @@ export function SearchList() {
             dataIndex: 'vinName',
             key: 'vinName',
             width: '30%',
-            ...getColumnSearchProps('vinName'),
-            render: (text, record) => record.vin.vinName,
+            ...getColumnSearchProps('vin.vinNameKor'),
+            render: (text, record) => record.vin.vinNameKor,
         },
         {
             title: '가격',
             dataIndex: 'price',
             key: 'price',
             width: '20%',
-            ...getColumnSearchProps('price'),
         },
         {
             title: '구매처',
@@ -156,8 +144,7 @@ export function SearchList() {
             title: '구매일',
             dataIndex: 'purchaseDate',
             key: 'purchaseDate',
-            ...getColumnSearchProps('purchaseDate'),
-            sorter: (a, b) => a.purchaseDate.length - b.purchaseDate.length,
+            sorter: (a, b) => new Date(a.purchaseDate) -  new Date(b.purchaseDate),
             sortDirections: ['descend', 'ascend'],
         },
     ];
