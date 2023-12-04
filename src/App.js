@@ -1,22 +1,9 @@
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-
-import {Main} from "./components/route/main";
-
+import './styles/App.css';
+import AppRouter from "./route/AppRouter";
 
 function App() {
   return (
-      <Router>
-        <div>
-          <Routes>
-            <Route exact path="/" element = {<Main />} />
-            </Routes>
-        </div>
-      </Router>
+      <AppRouter/>
   );
 }
 

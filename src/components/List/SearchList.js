@@ -2,29 +2,35 @@ import { SearchOutlined } from '@ant-design/icons';
 import React, {useEffect, useRef, useState} from 'react';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table } from 'antd';
-import '../../../styles/main.css';
+import '../../styles/main.css';
 import {useDispatch} from "react-redux";
-import {loadList} from "../../../_actions/list_action";
+import {loadList, searchList} from "../../redux/crud/action";
 
-export function SearchList() {
+export function SearchList(props) {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const [data, setData] = useState(null);
     const searchInput = useRef(null);
     const dispatch = useDispatch();
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await dispatch(loadList());
-                setData(response.payload)
+                if (props.searchValue) {
+                    const response = await dispatch(searchList(props.searchValue));
+                    setData(response.payload);
+                } else {
+                    const response = await dispatch(loadList());
+                    setData(response.payload);
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
 
         fetchData();
-    }, [dispatch]);
+    }, [dispatch, props.searchValue]);
+
+
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -87,17 +93,12 @@ export function SearchList() {
                 </Space>
             </div>
         ),
-        filterIcon: (filtered) => (
-            <SearchOutlined
-                style={{
-                    color: filtered ? '#1677ff' : undefined,
-                }}
-            />
+        filterIcon: () => (
+            <SearchOutlined className = "filter-icon"/>
         ),
-        onFilter: (value, record) => {
-            console.log(record[`${dataIndex}`])
+        onFilter: (value, record) =>
             record[`${dataIndex}`].toString().includes(value)
-        },
+        ,
         onFilterDropdownOpenChange: (visible) => {
             if (visible) {
                 setTimeout(() => searchInput.current?.select(), 100);
@@ -121,11 +122,11 @@ export function SearchList() {
     const columns = [
         {
             title: '와인명',
-            dataIndex: 'vinName',
-            key: 'vinName',
+            dataIndex: 'vinNameKor',
+            key: 'vinNameKor',
             width: '30%',
-            ...getColumnSearchProps('vin.vinNameKor'),
-            render: (text, record) => record.vin.vinNameKor,
+            ...getColumnSearchProps('vinNameKor'),
+            render: (text, record) => record.vinNameKor,
         },
         {
             title: '가격',
@@ -148,6 +149,7 @@ export function SearchList() {
             sortDirections: ['descend', 'ascend'],
         },
     ];
+
     return (
         <div className="centered-table">
             <Table columns={columns} dataSource={data} rowKey={(render)=> render.id} />

@@ -1,6 +1,23 @@
 .centered-table {
     width: 80%;
     margin: 0 auto;
+    padding: 30px;
+}
+
+.div {
+    text-align: center;
+    padding: 30px;
+}
+
+.centered-searchbar {
+    width: 80%;
+    height: 50px;
+    font-size: 16px;
+}
+
+.p {
+    text-align : center;
+    /*padding: 10px;*/
 }
 
 .centered-text {
@@ -12,4 +29,8 @@
 .footer {
     height : 20px;
     text-align : center;
+}
+
+.filter-icon {
+    color: #1677ff
 }
