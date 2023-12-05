@@ -7,6 +7,7 @@
 .div {
     text-align: center;
     padding: 30px;
+    /*height: 30px;*/
 }
 
 .centered-searchbar {
@@ -15,12 +16,11 @@
     font-size: 16px;
 }
 
-.p {
+.centered-text {
     text-align : center;
-    /*padding: 10px;*/
 }
 
-.centered-text {
+.centered-text-with-padding {
     /*height : 200px;*/
     text-align : center;
     padding: 100px;
@@ -33,4 +33,34 @@
 
 .filter-icon {
     color: #1677ff
+}
+
+.sidePanel {
+    border-right: 1px solid #edf0f5;
+    background: #fff;
+    transition: all 0.3s ease-in-out;
+    margin-top: 0;
+}
+
+.nav-bar-menu {
+    text-align : center;
+}
+
+main {
+    display: flex;
+    height: 100vh;
+}
+
+content {
+    height: 100%;
+    width: 85%;
+    background: white;
+    border-radius: 10px 0 0 10px;
+}
+
+siedbar {
+    height: 100%;
+    width: 15%;
+    background: white;
+    align-items:center;
 }

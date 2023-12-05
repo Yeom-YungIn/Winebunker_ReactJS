@@ -28,11 +28,12 @@ export const searchList = async (searchVal) => {
     }
 
     try {
-        const response= await axios.get("/resource/vin/list",{
+        const response= await axios.get("/resource/search",{
             params: {
                 searchVal: searchVal
             }
         });
+        console.log(response)
         request.payload = response.data;
     } catch (e) {
         console.log(e)
