@@ -11,7 +11,6 @@ export function Login() {
     };
 
     return (
-
         <Form
             name="basic"
             labelCol={{
@@ -22,6 +21,7 @@ export function Login() {
             }}
             style={{
                 maxWidth: 600,
+                margin: 'auto',
             }}
             initialValues={{
                 remember: true,
@@ -30,8 +30,8 @@ export function Login() {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
         >
-            <h1>Login</h1>
             <Form.Item
+                style={{marginRight: '20%'}}
                 label="Username"
                 name="username"
                 rules={[
@@ -45,6 +45,7 @@ export function Login() {
             </Form.Item>
 
             <Form.Item
+                style={{marginRight: '20%'}}
                 label="Password"
                 name="password"
                 rules={[
@@ -58,6 +59,7 @@ export function Login() {
             </Form.Item>
 
             <Form.Item
+                style={{marginRight: '20%'}}
                 name="remember"
                 valuePropName="checked"
                 wrapperCol={{
@@ -75,7 +77,7 @@ export function Login() {
                 }}
             >
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    로그인
                 </Button>
             </Form.Item>
         </Form>

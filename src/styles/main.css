@@ -46,6 +46,35 @@
     text-align : center;
 }
 
+.main-logo {
+    margin-right: auto;
+    margin-left: 40px;
+}
+
+.login-button {
+    text-align: right;
+    white-space: nowrap;
+    margin-right: 3%;
+}
+
+.input {
+    text-align: left;
+    padding: 0 25% 0 25%;
+    /*width: 75%;*/
+}
+
+.submit-button {
+    float: right;
+    /*padding: 0 25% 0 25%;*/
+    /*width: 75%;*/
+}
+
+.registration-button {
+    text-align: right;
+    white-space: nowrap;
+    margin-right: 1%;
+}
+
 main {
     display: flex;
     height: 100vh;
