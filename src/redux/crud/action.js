@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Load_List, Search_List} from "./types.js";
+import {Load_List, Registration_Resource, Search_List} from "./types.js";
 
 export const loadList = async () => {
     let request = {
@@ -19,7 +19,7 @@ export const loadList = async () => {
     }
 
     return request;
-}
+};
 
 export const searchList = async (searchVal) => {
     let request = {
@@ -40,4 +40,25 @@ export const searchList = async (searchVal) => {
     }
 
     return request;
-}
+};
+
+export const registrationResource = async (resourceDto, jwtToken) => {
+    let request = {
+        type: Registration_Resource,
+        payload: null,
+    };
+
+    try {
+        const response = await axios.post("/resource/save", resourceDto,{
+            headers: {
+                Authorization: `Bearer ${jwtToken}`,
+            }
+        });
+        console.log(response.status)
+        request.payload = response.status;
+    } catch (e) {
+        console.log(e);
+    }
+
+    return request;
+};

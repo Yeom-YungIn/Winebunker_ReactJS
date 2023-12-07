@@ -1,4 +1,4 @@
-import {Load_List, Search_List} from "./types";
+import {Load_List, Registration_Resource, Search_List} from "./types";
 
 const crudReducer = (state = null, action) => {
     switch (action.type) {
@@ -6,6 +6,9 @@ const crudReducer = (state = null, action) => {
             return {state: state, result: action.payload}
 
         case Search_List:
+            return {state: state, result: action.payload}
+
+        case Registration_Resource:
             return {state: state, result: action.payload}
 
         default:
