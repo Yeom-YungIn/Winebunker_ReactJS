@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {SearchList} from "../components/List/SearchList";
-import {Header} from "../components/Header/Header";
+import {Main} from "../components/Header/Main";
 import {Footer} from "../components/Footer/Footer";
-import {SearchBar} from "../components/SearchBar";
+import {SearchBar} from "../components/Searchbar/SearchBar";
+import {Header} from "../components/Header/Header";
 export default function MainModule() {
     const [searchValue, setSearchValue] = useState('');
 
@@ -11,11 +12,12 @@ export default function MainModule() {
     };
 
     return (
-        <div>
+        <>
             <Header/>
+            <Main/>
             <SearchBar onSearchChange={handleSearchChange}/>
             <SearchList searchValue={searchValue}/>
             <Footer/>
-        </div>
+        </>
     );
 }

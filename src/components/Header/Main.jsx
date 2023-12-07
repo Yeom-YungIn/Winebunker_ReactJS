@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Header() {
+export function Main() {
 
     return (
         <div className='centered-text-with-padding'>
