@@ -1,14 +1,26 @@
 import React from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {login} from "../../redux/auth/action";
 
 export function Login() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const onFinish = async (values) => {
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
+        const response = await dispatch(login(values))
+        console.log(response);
+        if (response.loginSuccess) {
+            navigate('/');
+        } else {
+            alert("가입되지 않은 계정입니다.")
+        }
     };
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
+
+    const onClickHandler = () => {
+        navigate('/')
+    }
 
     return (
         <Form
@@ -27,7 +39,6 @@ export function Login() {
                 remember: true,
             }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
         >
             <Form.Item
@@ -70,12 +81,10 @@ export function Login() {
                 <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
-            <Form.Item
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
+            <Form.Item>
+                <Button type="primary" htmlType="submit" onClick={onClickHandler}>
+                    뒤로
+                </Button>
                 <Button type="primary" htmlType="submit">
                     로그인
                 </Button>

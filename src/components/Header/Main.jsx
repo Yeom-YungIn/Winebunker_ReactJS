@@ -1,7 +1,6 @@
 import React from 'react';
 
 export function Main() {
-
     return (
         <div className='centered-text-with-padding'>
             <h1>WINE BUNKER</h1>
