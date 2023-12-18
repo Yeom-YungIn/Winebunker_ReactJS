@@ -93,3 +93,29 @@ siedbar {
     background: white;
     align-items:center;
 }
+
+/* 전체 폼 컨테이너에 대한 스타일 */
+.FormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 각 입력 폼과 체크박스에 대한 스타일 */
+.FormItem {
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+/* 두 버튼에 대한 스타일 */
+.SubmitButton {
+    margin-right: 10px; /* 버튼 간격 조절 */
+}
+
+.ButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+

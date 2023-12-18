@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Load_List, Registration_Resource, Search_List} from "./types.js";
+import {Load_List, Registration_Resource, Search_List, Search_Vin} from "./types.js";
 
 export const loadList = async () => {
     let request = {
@@ -62,3 +62,23 @@ export const registrationResource = async (resourceDto, jwtToken) => {
 
     return request;
 };
+
+export const vinSearchList = async(vinName) => {
+    let request = {
+        type: Search_Vin,
+        payload: null,
+    }
+
+    try {
+        const response= await axios.get("/vin/list",{
+            params: {
+                vinNameKor: vinName
+            }
+        });
+        request.payload = response.data;
+    } catch (e) {
+        console.log(e)
+    }
+
+    return request;
+}

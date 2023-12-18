@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Input, Modal} from 'antd';
+import {Button, Input, Modal, Table} from 'antd';
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {registrationResource} from "../../redux/crud/action";
+import {registrationResource, vinSearchList} from "../../redux/crud/action";
 
 
 
@@ -10,7 +10,7 @@ import {registrationResource} from "../../redux/crud/action";
 export function Registration() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [vinNameKor, setVinNameKor] = useState('');
+    const [vinSn, setVinSn] = useState('');
     const [date, setDate] = useState(String(Date()));
     const [price, setPrice] = useState('');
     const [vintage, setVintage] = useState('');
@@ -18,15 +18,47 @@ export function Registration() {
     const [store, setStore] = useState('');
     const [description, setDescription] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [searchInput, setSearchInput] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [selectedVin, setSelectedVin] = useState(null);
 
 
+    const colunms = [
+        {
+            title: '와인명',
+            dataIndex: 'vinNameKor',
+            key: 'vinNameKor'
+        },
+        {
+            title: '지역',
+            dataIndex: 'region',
+            key: 'region'
+        },
+    ]
 
     useEffect(() => {
-        console.log(vinNameKor)
-    },[vinNameKor])
+        const fetchData = async () => {
+            try {
+                // 검색어가 비어 있으면 빈 배열로 초기화
+                if (!searchInput.trim()) {
+                    setSearchResults([]);
+                    return;
+                }
+
+                // 서버에서 데이터를 가져오는 API 호출
+                const response = await dispatch(vinSearchList(searchInput))
+                setSearchResults(response.payload);
+                console.log(searchResults)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchData()
+    },[searchInput])
+
     async function onSubmitHandler() {
-        const resourceObj_tbd = {
-            "vinSn": '1',
+        const resourceObj = {
+            "vinSn": vinSn,
             "vintage": vintage,
             "price": price,
             "store": store,
@@ -34,11 +66,15 @@ export function Registration() {
             "description": description,
             "purchaseDate": date
         };
-        console.log(resourceObj_tbd);
-        return null;
-        const accessToken = window.localStorage.getItem('key')
+        const key = JSON.parse(window.localStorage.getItem('key'));
+        const accessToken = key.accessToken, expires = key.expires;
+        if (new Date() > expires) {
+           alert('로그인 시간이 만료되었습니다.')
+           navigate('/')
+        }
         try {
-            const response = await dispatch(registrationResource(resourceObj_tbd, accessToken));
+            console.log(resourceObj)
+            const response = await dispatch(registrationResource(resourceObj, accessToken));
             if (response.payload === 201) {
                 navigate('/')
             }
@@ -65,21 +101,28 @@ export function Registration() {
     const handleDescription = (event) => {
         setDescription(event.target.value);
     }
-    
-    const handleVinNameKor = () => {
-        
-    }
+    const handleInputChange = (event) => {
+        setSearchInput(event.target.value);
+    };
 
     const showModal = () => {
         setIsModalOpen(true);
     };
 
     const handleOk = () => {
+        if (selectedVin) {
+            setSearchInput(selectedVin.vinNameKor);
+            setVinSn(selectedVin.vinSn)
+        }
         setIsModalOpen(false);
     };
 
     const handleCancel = () => {
         setIsModalOpen(false);
+    };
+
+    const handleRowClick = (record) => {
+        setSelectedVin(record);
     };
 
     return (
@@ -88,10 +131,17 @@ export function Registration() {
             <Input placeholder="날짜를 입력하세요" onChange={handleDate} />
             <p>와인명</p>
             <div style ={{display: 'flex', alignItems: 'center'}}>
-                <Input placeholder="와인명"/>
-                <Button onClick={showModal}>검색</Button>
+                {/*<Input placeholder="와인명"/>*/}
+                <Input type="text" placeholder="와인명" value={searchInput} disabled={selectedVin !== null} onChange={handleInputChange}/>
+                <Button onClick={showModal}>찾기</Button>
                 <Modal title="와인 검색" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                    <p>Some contents...</p>
+                    <Table
+                        columns={colunms}
+                        dataSource={searchResults}
+                        onRow={(record) => ({
+                            onClick: () => handleRowClick(record),
+                        })}
+                    />
                 </Modal>
             </div>
             <p>구입처</p>

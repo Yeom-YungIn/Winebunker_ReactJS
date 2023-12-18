@@ -6,8 +6,8 @@ export const login = async (loginData) => {
         type: Auth_Login_Success,
         loginSuccess: false,
         accessToken: null,
+        expires : null
     }
-    console.log(loginData)
     try {
         const response= await axios.post("/auth/login",{
             id: loginData.username,
@@ -17,7 +17,8 @@ export const login = async (loginData) => {
         if (response.status === 201) {
             request.loginSuccess = true;
             request.accessToken = response.data.accessToken;
-            window.localStorage.setItem("key", response.data.accessToken);
+            request.expires = new Date().getTime() + 60 * 1000 * 1000;
+            window.localStorage.setItem("key", JSON.stringify(request));
         } else {
             request.loginSuccess = false;
         }
@@ -25,6 +26,18 @@ export const login = async (loginData) => {
     } catch (e) {
         console.log(e)
     }
+
+    return request;
+};
+
+export const logout = () => {
+    let request = {
+        type: Auth_Login_Success,
+        loginSuccess: false,
+        accessToken: null,
+        expires: null,
+    }
+    window.localStorage.setItem('key', JSON.stringify(request));
 
     return request;
 };

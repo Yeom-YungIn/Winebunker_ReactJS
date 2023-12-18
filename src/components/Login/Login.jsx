@@ -24,72 +24,38 @@ export function Login() {
 
     return (
         <Form
-            name="basic"
-            labelCol={{
-                span: 8,
-            }}
-            wrapperCol={{
-                span: 16,
-            }}
-            style={{
-                maxWidth: 600,
-                margin: 'auto',
-            }}
+            className="FormContainer"
             initialValues={{
                 remember: true,
             }}
             onFinish={onFinish}
             autoComplete="off"
         >
-            <Form.Item
-                style={{marginRight: '20%'}}
-                label="Username"
-                name="username"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your username!',
-                    },
-                ]}
-            >
+            <Form.Item className="FormItem" label="Username" name="username" rules={[/* ... */]}>
                 <Input />
             </Form.Item>
 
-            <Form.Item
-                style={{marginRight: '20%'}}
-                label="Password"
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                ]}
-            >
+            <Form.Item className="FormItem" label="Password" name="password" rules={[/* ... */]}>
                 <Input.Password />
             </Form.Item>
 
-            <Form.Item
-                style={{marginRight: '20%'}}
-                name="remember"
-                valuePropName="checked"
-                wrapperCol={{
-                    offset: 8,
-                    span: 16,
-                }}
-            >
+            <Form.Item className="FormItem" name="remember" valuePropName="checked">
                 <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
-            <Form.Item>
-                <Button type="primary" htmlType="submit" onClick={onClickHandler}>
-                    뒤로
-                </Button>
-                <Button type="primary" htmlType="submit">
-                    로그인
-                </Button>
+            <Form.Item className="FormItem">
+                {/* 버튼을 중앙 정렬하는 컨테이너 추가 */}
+                <div className="ButtonContainer">
+                    <Button className="SubmitButton" type="primary" htmlType="submit" onClick={onClickHandler}>
+                        뒤로
+                    </Button>
+                    <Button className="SubmitButton" type="primary" htmlType="submit">
+                        로그인
+                    </Button>
+                </div>
             </Form.Item>
         </Form>
+
     );
 
 }

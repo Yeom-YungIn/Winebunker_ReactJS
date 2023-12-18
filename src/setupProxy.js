@@ -14,4 +14,10 @@ module.exports = function(app) {
             changeOrigin: true,
         })
     );
+    app.use(
+        createProxyMiddleware('/vin',{
+            target: 'http://localhost:3333',
+            changeOrigin: true,
+        })
+    );
 };
