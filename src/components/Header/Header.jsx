@@ -1,11 +1,10 @@
 import React from 'react';
-import {Button} from "antd";
-import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {logout} from "../../redux/auth/action";
-
-
-
+import { Button, Image } from "antd";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/auth/action";
+import Logo from '../../styles/logo.png';
+import { MainPage } from "../../page/MainPage";
 
 export function Header() {
     const dispatch = useDispatch();
@@ -59,34 +58,34 @@ export function Header() {
         )
     }
 
-
     const checkToken = () => {
-        const key = JSON.parse(window.localStorage.getItem('key'))
-        const accessToken = key.accessToken
-        const expires = key.expires;
-        if (accessToken && new Date() < expires) {
+        const isLogIn = window.localStorage.getItem('isLogIn');
+        const expires = window.localStorage.getItem('expires');
+        if (isLogIn && new Date() < expires) {
             return true;
         } else {
             return false;
         }
     }
+
     if (checkToken()) {
         return (
-            <div style={{display: 'flex', alignItems: 'center'}}>
-                <h1 className="main-logo">WineBunker</h1>
-                <RegistrationButton/>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <a href='/' className='main-logo'>
+                    <Image src={Logo} alt="WineBunker Logo" preview={false} />
+                </a>
+                <RegistrationButton />
                 <Logout />
             </div>
         );
     } else {
         return (
-            <div style={{display: 'flex', alignItems: 'center'}}>
-                <h1 className="main-logo">WineBunker</h1>
-                <LoginButton/>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <a href='/' className='main-logo'>
+                    <Image src={Logo} alt="WineBunker Logo" preview={false} />
+                </a>
+                <LoginButton />
             </div>
         );
     }
-
-
 }
-
