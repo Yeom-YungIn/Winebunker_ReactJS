@@ -33,7 +33,6 @@ export const searchList = async (searchVal) => {
                 searchVal: searchVal
             }
         });
-        console.log(response)
         request.payload = response.data;
     } catch (e) {
         console.log(e)

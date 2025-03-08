@@ -10,7 +10,6 @@ export function Login() {
     const onFinish = async (values) => {
 
         const response = await dispatch(login(values))
-        console.log(response);
         if (response.loginSuccess) {
             navigate('/');
         } else {
@@ -31,7 +30,7 @@ export function Login() {
             onFinish={onFinish}
             autoComplete="off"
         >
-            <Form.Item className="FormItem" label="Username" name="username" rules={[/* ... */]}>
+            <Form.Item className="FormItem" label="Name" name="name" rules={[/* ... */]}>
                 <Input />
             </Form.Item>
 
