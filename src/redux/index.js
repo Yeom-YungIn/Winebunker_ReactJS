@@ -1,8 +1,8 @@
-import {combineReducers} from "redux";
+import { combineReducers } from 'redux';
 import list from './crud/reducer';
 
 const rootReducer = combineReducers({
-    list,
-})
+  list,
+});
 
 export default rootReducer;

@@ -1,121 +1,120 @@
 .centered-table {
-    width: 80%;
-    margin: 0 auto;
-    padding: 30px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px;
 }
 
 .div {
-    text-align: center;
-    padding: 30px;
-    /*height: 30px;*/
+  text-align: center;
+  padding: 30px;
+  /*height: 30px;*/
 }
 
 .centered-searchbar {
-    width: 80%;
-    height: 50px;
-    font-size: 16px;
+  width: 80%;
+  height: 50px;
+  font-size: 16px;
 }
 
 .centered-text {
-    text-align : center;
+  text-align: center;
 }
 
 .centered-text-with-padding {
-    /*height : 200px;*/
-    text-align : center;
-    padding: 100px;
+  /*height : 200px;*/
+  text-align: center;
+  padding: 100px;
 }
 
 .footer {
-    height : 20px;
-    text-align : center;
+  height: 20px;
+  text-align: center;
 }
 
 .filter-icon {
-    color: #1677ff
+  color: #1677ff;
 }
 
 .sidePanel {
-    border-right: 1px solid #edf0f5;
-    background: #fff;
-    transition: all 0.3s ease-in-out;
-    margin-top: 0;
+  border-right: 1px solid #edf0f5;
+  background: #fff;
+  transition: all 0.3s ease-in-out;
+  margin-top: 0;
 }
 
 .nav-bar-menu {
-    text-align : center;
+  text-align: center;
 }
 
 .main-logo {
-    margin-right: auto;
-    margin-left: 40px;
+  margin-right: auto;
+  margin-left: 40px;
 }
 
 .login-button {
-    text-align: right;
-    white-space: nowrap;
-    margin-right: 3%;
+  text-align: right;
+  white-space: nowrap;
+  margin-right: 3%;
 }
 
 .input {
-    text-align: left;
-    padding: 0 25% 0 25%;
-    /*width: 75%;*/
+  text-align: left;
+  padding: 0 25% 0 25%;
+  /*width: 75%;*/
 }
 
 .submit-button {
-    float: right;
-    /*padding: 0 25% 0 25%;*/
-    /*width: 75%;*/
+  float: right;
+  /*padding: 0 25% 0 25%;*/
+  /*width: 75%;*/
 }
 
 .registration-button {
-    text-align: right;
-    white-space: nowrap;
-    margin-right: 1%;
+  text-align: right;
+  white-space: nowrap;
+  margin-right: 1%;
 }
 
 main {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 content {
-    height: 100%;
-    width: 85%;
-    background: white;
-    border-radius: 10px 0 0 10px;
+  height: 100%;
+  width: 85%;
+  background: white;
+  border-radius: 10px 0 0 10px;
 }
 
 siedbar {
-    height: 100%;
-    width: 15%;
-    background: white;
-    align-items:center;
+  height: 100%;
+  width: 15%;
+  background: white;
+  align-items: center;
 }
 
 /* 전체 폼 컨테이너에 대한 스타일 */
 .FormContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 각 입력 폼과 체크박스에 대한 스타일 */
 .FormItem {
-    margin-bottom: 20px;
-    width: 50%;
+  margin-bottom: 20px;
+  width: 50%;
 }
 
 /* 두 버튼에 대한 스타일 */
 .SubmitButton {
-    margin-right: 10px; /* 버튼 간격 조절 */
+  margin-right: 10px; /* 버튼 간격 조절 */
 }
 
 .ButtonContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
-

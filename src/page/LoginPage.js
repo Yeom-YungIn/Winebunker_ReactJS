@@ -1,10 +1,6 @@
 import React from 'react';
-import LoginModule from "../modules/LoginModule";
+import LoginModule from '../modules/LoginModule';
 
 export function LoginPage() {
-
-    return (
-        <LoginModule/>
-    )
-
+  return <LoginModule />;
 }
