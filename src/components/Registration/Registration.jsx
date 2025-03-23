@@ -65,12 +65,7 @@ export function Registration() {
     const key = JSON.parse(window.localStorage.getItem('key'));
     const accessToken = key.accessToken,
       expires = key.expires;
-    if (new Date() > expires) {
-      alert('로그인 시간이 만료되었습니다.');
-      navigate('/');
-    }
     try {
-      console.log(resourceObj);
       const response = await dispatch(
         registrationResource(resourceObj, accessToken),
       );
@@ -138,21 +133,6 @@ export function Registration() {
           disabled={selectedVin !== null}
           onChange={handleInputChange}
         />
-        <Button onClick={showModal}>찾기</Button>
-        <Modal
-          title="와인 검색"
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <Table
-            columns={colunms}
-            dataSource={searchResults}
-            onRow={(record) => ({
-              onClick: () => handleRowClick(record),
-            })}
-          />
-        </Modal>
       </div>
       <p>구입처</p>
       <Input placeholder="구입처" onChange={handleStore} />
